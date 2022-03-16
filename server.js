@@ -2,12 +2,16 @@ const { app } = require('./app');
 
 
 const { sequelize } = require('./util/database');
+const { initModels } = require('./util/initModels');
 
 
 sequelize
     .authenticate()
     .then(()=> console.log('DB authenticated'))
     .catch((err)=> console.log(err));
+
+// model relations
+initModels();
 
 sequelize
     .sync()
