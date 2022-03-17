@@ -26,9 +26,9 @@ exports.createNewUser = catchAsync( async (req, res, next) =>{
 
 });
 
-
-exports.deleteUser = catchAsync( async (req, res, next) =>{
+exports.loginUser = catchAsync( async (req, res, next) =>{
 
 });
+
 
 
