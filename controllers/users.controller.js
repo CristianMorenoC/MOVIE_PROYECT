@@ -1,11 +1,6 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
 // models
-const { Actor } = require('../models/actors.model');
-const { Movies } = require('../models/movies.model');
-const { Review } = require('../models/review.model');
 const { User } = require('../models/users.model');
 
 // Utils

@@ -22,7 +22,7 @@ const Movies = sequelize.define('movies', {
       },
       rating: {
         type: DataTypes.INTEGER,
-        defaultValue: 5,
+        defaultValue: 1,
         allowNull: false,
       },
       img: {
