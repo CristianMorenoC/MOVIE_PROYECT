@@ -1,8 +1,11 @@
 const express = require('express');
 
-const = {
-
-} = require('../controllers')
+const {
+    getActorById,
+    createNewActor,
+    updatedActor,
+    deleteActor
+} = require('../controllers/actor.controller')
 
 const router = express.Router();
 

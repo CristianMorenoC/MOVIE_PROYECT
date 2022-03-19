@@ -10,13 +10,11 @@ const ActorsInMovies = sequelize.define('actorsInMovies', {
       },
       actorId: {
         primaryKey: true,
-        autoIncrement: true,
         type: DataTypes.INTEGER,
         allowNull: false
       },
       movieId: {
         primaryKey: true,
-        autoIncrement: true,
         type: DataTypes.INTEGER,
         allowNull: false
       },

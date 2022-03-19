@@ -28,13 +28,11 @@ const Review = sequelize.define('review', {
       },
       userID: {
         primaryKey: true,
-        autoIncrement: true,
         type: DataTypes.INTEGER,
         allowNull: false
       },
       commentID: {
         primaryKey: true,
-        autoIncrement: true,
         type: DataTypes.INTEGER,
         allowNull: false
       }
