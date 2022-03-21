@@ -25,6 +25,22 @@ exports.getAllUsers = catchAsync( async (req, res, next) =>{
 
 exports.getUserById = catchAsync( async (req, res, next) =>{
 
+    const { id } = req.params
+    
+    const user = await User.findOne({ 
+        where: { id, status: 'active' },
+        attributes: { exclude: ['password']}
+    })
+
+    if (!user){
+        return next(new AppError(400, 'Id provided not is valid'))
+    }
+
+    res.status(200).json({
+        status: 'success',
+        data: { user }
+    })
+
 });
 
 exports.createNewUser = catchAsync( async (req, res, next) =>{

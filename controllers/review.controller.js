@@ -15,6 +15,8 @@ dotenv.config({ path: './config.env' });
 
 exports.getAllReviews = catchAsync((req, res, next) => {
 
+    
+
 });
 
 exports.createNewReview = catchAsync((req, res, next) => {

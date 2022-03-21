@@ -1,4 +1,5 @@
 const express = require('express');
+const { upload } = require('../util/multer');
 
 const {
     getAllMovies,
@@ -14,11 +15,11 @@ router.get('/', getAllMovies);
 
 router.get('/:id', getMovieById);
 
-router.post('/', createNewMovie);
+router.post('/', upload.single('postImg'), createNewMovie);
 
 router.post('/updated/:id', updatedMovie);
 
-router.patch('/deleteMovie/:id', deleteMovie);
+router.patch('/delete/:id', deleteMovie);
 
 
 

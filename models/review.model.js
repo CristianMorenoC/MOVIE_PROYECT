@@ -31,7 +31,7 @@ const Review = sequelize.define('review', {
         type: DataTypes.INTEGER,
         allowNull: false
       },
-      commentID: {
+      movieId: {
         primaryKey: true,
         type: DataTypes.INTEGER,
         allowNull: false

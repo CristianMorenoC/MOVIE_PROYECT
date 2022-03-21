@@ -18,8 +18,9 @@ app.use(express.json());
 // endpoints
 app.use('/api/users', usersRouter);
 app.use('/api/movies', movieRouter);
+app.use('/api/movies/review', reviewRouter);
 app.use('/api/actors', actorRouter);
-app.use('/api/review', reviewRouter);
+// app.use('/api/review', reviewRouter);
 
 app.use('*', (req, res, next) => {
     next(new AppError('404', `${req.originalUrl} not found`));
