@@ -55,10 +55,10 @@ exports.getMovieById = catchAsync( async (req, res, next) => {
 
 exports.createNewMovie = catchAsync( async(req, res, next) => {
 
-    const { title, description, duration, genre } = req.body;
+    const { title, description, duration, genre, actors } = req.body;
 
 
-    if(!title || !description || !duration || !genre){
+    if(!title || !description || !duration || !genre || !actors){
         return next(new AppError(400, 'Tittle, description, duration, img or genre is empity or invalid'))
     };
 
@@ -74,6 +74,7 @@ exports.createNewMovie = catchAsync( async(req, res, next) => {
         img: result.metadata.fullPath
     });
 
+    newMovie.addActors(actors);
 
     res.status(201).json({
         status: 'success',
