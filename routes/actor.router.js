@@ -1,6 +1,9 @@
 const express = require('express');
 const { upload } = require('../util/multer');
 
+const { validateSesion } = require('../middleweares/auth.middleweare');
+const { checkRoleAuth } = require('../middleweares/auth.role.middleweare');
+
 const {
     getAllActors,
     getActorById,
@@ -11,14 +14,14 @@ const {
 
 const router = express.Router();
 
-router.get('/', getAllActors)
+router.get('/', validateSesion, checkRoleAuth(['admin', 'guest']), getAllActors)
 
-router.get('/:id', getActorById);
+router.get('/:id', validateSesion, checkRoleAuth(['admin', 'guest']), getActorById);
 
-router.post('/create/', upload.single('actorImg'), createNewActor);
+router.post('/create/', upload.single('actorImg'), validateSesion, checkRoleAuth(['admin']), createNewActor);
 
-router.patch('/updated/:id', updatedActor);
+router.patch('/updated/:id', validateSesion, checkRoleAuth(['admin']), updatedActor);
 
-router.patch('/delete/:id', deleteActor);
+router.patch('/delete/:id', validateSesion, checkRoleAuth(['admin']), deleteActor);
 
 module.exports = { actorRouter: router};

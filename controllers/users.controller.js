@@ -1,5 +1,6 @@
 const dotenv = require('dotenv');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 // models
 const { User } = require('../models/users.model');
@@ -74,6 +75,27 @@ exports.createNewUser = catchAsync( async (req, res, next) =>{
 
 exports.loginUser = catchAsync( async (req, res, next) =>{
 
+     
+    const { email, password } = req.body;
+
+    const user = await User.findOne({
+        where: { email, status: 'active'}
+    });
+
+    if(!user || !(await bcrypt.compare(password, user.password))){
+        return next(new AppError(400, 'credential are invalid'));
+    };
+
+    const token = await jwt.sign(
+        { id: user.id, role: user.role },
+        process.env.SECRET_KEY,
+        { expiresIn: process.env.EXPIRES_IN}
+    )
+
+    res.status(200).json({
+        status: 'success',
+        data: { token }
+    })
 });
 
 

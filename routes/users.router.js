@@ -1,7 +1,9 @@
 const express = require('express');
 
-// controllers
+const  {validateSesion}  = require('../middleweares/auth.middleweare');
+const { checkRoleAuth } = require('../middleweares/auth.role.middleweare');
 
+// controllers
 const {
     getAllUsers,
     getUserById,
@@ -11,13 +13,13 @@ const {
 
 const router = express.Router();
 
-router.get('/', getAllUsers);
+router.get('/', validateSesion, checkRoleAuth(['admin']), getAllUsers);
 
-router.get('/:id', getUserById);
+router.get('/:id', validateSesion, checkRoleAuth(['admin']),  getUserById);
 
-router.post('/', createNewUser);
+router.post('/', validateSesion, checkRoleAuth(['admin']), createNewUser);
 
-router.post('/delete/:id', loginUser);
+router.post('/login', loginUser);
 
 
 module.exports = { usersRouter: router };

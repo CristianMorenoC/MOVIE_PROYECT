@@ -1,4 +1,6 @@
 const express = require('express');
+const {checkRoleAuth} = require('../middleweares/auth.role.middleweare');
+const { validateSesion } = require('../middleweares/auth.middleweare');
 
 const {
     getAllReviews,
@@ -9,14 +11,14 @@ const {
 
 const router = express.Router();
 
-router.get('/', getAllReviews);
+router.get('/', validateSesion, checkRoleAuth(['admin', 'guest']), getAllReviews);
 
-router.get('/:id', getAllReviews);
+router.get('/:id', validateSesion, checkRoleAuth(['admin', 'guest']), getAllReviews);
 
-router.post('/', createNewReview);
+router.post('/', validateSesion, checkRoleAuth(['admin', 'guest']), createNewReview);
 
-router.put('/:id', updatedReview);
+router.put('/:id', validateSesion, checkRoleAuth(['admin', 'guest']), updatedReview);
 
-router.patch('/delete/:id', deleteReview);
+router.patch('/delete/:id', validateSesion, checkRoleAuth(['admin', 'guest']), deleteReview);
 
 module.exports = { reviewRouter: router };

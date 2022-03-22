@@ -1,6 +1,9 @@
 const express = require('express');
 const { upload } = require('../util/multer');
 
+const { checkRoleAuth } = require('../middleweares/auth.role.middleweare');
+const { validateSesion } = require('../middleweares/auth.middleweare');
+
 const {
     getAllMovies,
     getMovieById,
@@ -11,15 +14,15 @@ const {
 
 const router = express.Router();
 
-router.get('/', getAllMovies);
+router.get('/', validateSesion, checkRoleAuth(['admin', 'guest']), getAllMovies);
 
-router.get('/:id', getMovieById);
+router.get('/:id', validateSesion, checkRoleAuth(['admin', 'guest']), getMovieById);
 
-router.post('/', upload.single('postImg'), createNewMovie);
+router.post('/', validateSesion, checkRoleAuth(['admin']), upload.single('postImg'), createNewMovie);
 
-router.post('/updated/:id', updatedMovie);
+router.post('/updated/:id', validateSesion, checkRoleAuth(['admin']), updatedMovie);
 
-router.patch('/delete/:id', deleteMovie);
+router.patch('/delete/:id', validateSesion, checkRoleAuth(['admin']), deleteMovie);
 
 
 
