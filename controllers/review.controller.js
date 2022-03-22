@@ -16,7 +16,7 @@ const { filterObj } = require('../util/filterObj');
 
 dotenv.config({ path: './config.env' });
 
-exports.getAllReviews = catchAsync(async ( req, res, next) => {
+exports.getAllReviews = catchAsync( async ( req, res, next) => {
 
     const reviews = await Review.findAll({ where: { status: 'active' }})
 
@@ -59,7 +59,7 @@ exports.createNewReview = catchAsync( async (req, res, next) => {
     })
 });
 
-exports.updatedReview = catchAsync(async (req, res, next) => {
+exports.updatedReview = catchAsync( async (req, res, next) => {
 
     const { id } = req.params;
 
